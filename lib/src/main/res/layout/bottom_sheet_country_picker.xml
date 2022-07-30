@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_bottom_sheet_white_radius_35"
-    android:orientation="vertical"
-    android:padding="32dp">
-
+    app:layout_behavior="@string/bottom_sheet_behavior"
+     android:layout_height="match_parent"
+    android:layout_width="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:background="@drawable/bg_bottom_sheet_white_radius_35"
         android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:padding="32dp">
 
-        <com.google.android.material.textview.MaterialTextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/dmsans_medium"
-            android:text="@string/bottom_sheet_title"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dmsans_medium"
+                android:text="@string/bottom_sheet_title"
+                android:textColor="@color/dark"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/dmsans_regular"
+                android:text="@string/select_country_code"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_personal" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_edt_primary"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/dmsans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/search_country_code"
+            android:padding="10dp"
             android:textColor="@color/dark"
             android:textSize="13sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:fontFamily="@font/dmsans_regular"
-            android:text="@string/select_country_code"
-            android:textColor="@color/text_secondary"
-            android:textSize="11sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_personal" />
+            android:minHeight="200dp"
+            tools:listitem="@layout/item_country_picker" />
 
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/bg_edt_primary"
-        android:drawableLeft="@drawable/ic_search"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/dmsans_regular"
-        android:gravity="center_vertical"
-        android:hint="@string/search_country_code"
-        android:padding="10dp"
-        android:textColor="@color/dark"
-        android:textSize="13sp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="200dp"
-        tools:listitem="@layout/item_country_picker" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
