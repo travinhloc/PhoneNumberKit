@@ -6,19 +6,18 @@ apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
 
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_11
-            targetCompatibility JavaVersion.VERSION_11
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
 
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11
+            jvmTarget = JavaVersion.VERSION_1_8
         }
 
         buildFeatures {
