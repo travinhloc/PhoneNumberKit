@@ -130,7 +130,3 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
         }
     }
 }
-
-interface CountryListener {
-    fun getCountry(country: Country)
-}
