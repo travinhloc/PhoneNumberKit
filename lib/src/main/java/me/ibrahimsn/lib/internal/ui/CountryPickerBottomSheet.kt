@@ -152,8 +152,6 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "countryPickerBottomSheet"
-        fun newInstance(listener: CountryListener) = CountryPickerBottomSheet().apply {
-            setReturnCountryListener(listener)
-        }
+        fun newInstance() = CountryPickerBottomSheet()
     }
 }

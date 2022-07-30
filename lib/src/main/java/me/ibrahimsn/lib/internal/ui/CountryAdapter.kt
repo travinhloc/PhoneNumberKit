@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
@@ -47,11 +48,12 @@ class CountryAdapter(
         private val imageViewFlag = view.findViewById<ImageView>(R.id.imageViewFlag)
         private val textViewName = view.findViewById<TextView>(R.id.textViewName)
         private val textViewCode = view.findViewById<TextView>(R.id.textViewCode)
+        private val root = view.findViewById<LinearLayout>(R.id.root)
 
         private var boundItem: Country? = null
 
         init {
-            itemView.setOnClickListener {
+            root.setOnClickListener {
                 boundItem?.let {
                     onItemClickListener?.invoke(it)
                 }

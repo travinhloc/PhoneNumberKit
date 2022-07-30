@@ -18,12 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnBottom.setOnClickListener {
-            CountryPickerBottomSheet.newInstance(object : CountryListener {
-                override fun getCountry(country: Country) {
-                    Toast.makeText(this@MainActivity, country.name,Toast.LENGTH_LONG ).show()
-                }
+            CountryPickerBottomSheet.newInstance().apply {
+                setReturnCountryListener(object : CountryListener {
+                    override fun getCountry(country: Country) {
+                        Toast.makeText(this@MainActivity, country.name,Toast.LENGTH_LONG ).show()
+                    }
 
-            }).apply {show(
+                })
+                show(
                     this@MainActivity.supportFragmentManager,
                     CountryPickerBottomSheet.TAG
                 )

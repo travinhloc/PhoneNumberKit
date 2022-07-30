@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingVertical="12dp"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageViewFlag"
-        style="@style/ShapeAppearanceOverlay.App.CircleImageView"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:scaleType="fitXY"
-        tools:src="@drawable/country_flag_tr" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewName"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textSize="13sp"
-        android:fontFamily="@font/dmsans_medium"
-        android:textColor="@color/dark"
-        tools:text="Turkey (Türkiye)" />
+        style="@style/SelectableItemBackground"
+        android:paddingHorizontal="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/dmsans_medium"
-        android:textColor="@color/text_secondary"
-        android:textSize="13sp"
-        tools:text="90" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewFlag"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            app:civ_border_color="@color/elevation"
+            app:civ_border_width="0.15dp"
+            tools:src="@drawable/country_flag_tr" />
 
-</LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/dmsans_medium"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/text_black"
+            android:textSize="13sp"
+            tools:text="Turkey (Türkiye)" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dmsans_medium"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            tools:text="90" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

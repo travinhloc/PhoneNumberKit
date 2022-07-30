@@ -11,13 +11,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_bottom_sheet_white_radius_35"
         android:orientation="vertical"
-        android:padding="32dp">
+        android:paddingVertical="32dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical"
+            android:paddingHorizontal="32dp"
             android:paddingBottom="20dp">
 
             <com.google.android.material.textview.MaterialTextView
@@ -47,6 +48,7 @@
             android:layout_height="38dp"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="15dp"
+            android:layout_marginHorizontal="32dp"
             android:background="@drawable/bg_edt_primary"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"

@@ -23,4 +23,18 @@
         <item name="android:fontFamily">@font/dmsans_medium</item>
     </style>
 
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">#80a3abb8</item>
+    </style>
+
+    <style name="SelectableItemBackground" parent="SelectableItemTheme">
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="SelectableItemBackgroundBorderless" parent="SelectableItemTheme">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+
 </resources>
