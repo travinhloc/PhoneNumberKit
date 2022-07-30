@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="greenCitrus">#FF99CC00</color>
+    <color name="greenChristi">#FF669900</color>
 
+    <color name="text_dark">@color/dark</color>
+    <color name="text_secondary">#757575</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="elevation">#D8D8D8</color>
+
+    <color name="blue">#1240C0</color>
+    <color name="blue_50">#801240C0</color>
+
+    <color name="dark">#131313</color>
+    <color name="dark_80">#cc131313</color>
+    <color name="dark_50">#80131313</color>
+    <color name="dark_40">#66131313</color>
+    <color name="dark_20">#40131313</color>
+    <color name="dark_10">#1a131313</color>
+
+    <color name="gray">#F2F2F2</color>
+    <color name="gray_100">#8F92A1</color>
+
+    <color name="red">#D11D1D</color>
+    <color name="red_50">#80D11D1D</color>
 </resources>

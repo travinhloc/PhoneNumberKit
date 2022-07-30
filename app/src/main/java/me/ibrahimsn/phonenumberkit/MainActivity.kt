@@ -2,8 +2,10 @@ package me.ibrahimsn.phonenumberkit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import me.ibrahimsn.lib.PhoneNumberKit
+import android.widget.Toast
+import me.ibrahimsn.lib.api.Country
+import me.ibrahimsn.lib.internal.ui.CountryListener
+import me.ibrahimsn.lib.internal.ui.CountryPickerBottomSheet
 import me.ibrahimsn.phonenumberkit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,37 +17,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val phoneNumberKit = PhoneNumberKit.Builder(this)
-            .setIconEnabled(true)
-            .build()
+        binding.btnBottom.setOnClickListener {
+            CountryPickerBottomSheet.newInstance(object : CountryListener {
+                override fun getCountry(country: Country) {
+                    Toast.makeText(this@MainActivity, country.name,Toast.LENGTH_LONG ).show()
+                }
 
-        // To attach an editTextLayout
-        phoneNumberKit.attachToInput(binding.textField, "tr")
-
-        // Setup country code picker optionally
-        phoneNumberKit.setupCountryPicker(
-            activity = this,
-            searchEnabled = true
-        )
-
-        // Provides example phone number for given country iso2 code
-        val exampleNumber = phoneNumberKit.getExampleNumber("tr")
-        Log.d(TAG, "Example Number: $exampleNumber")
-
-        // Parses raw phone number to phone object
-        val parsedNumber = phoneNumberKit.parsePhoneNumber(
-            number = "05066120000",
-            defaultRegion = "us"
-        )
-        Log.d(TAG, "Parsed Number: $parsedNumber")
-
-        // Converts raw phone number to international formatted phone number
-        // Ex: +90 506 606 00 00
-        val formattedNumber = phoneNumberKit.formatPhoneNumber(
-            number = "05066120000",
-            defaultRegion = "tr"
-        )
-        Log.d(TAG, "Formatted Number: $formattedNumber")
+            }).apply {show(
+                    this@MainActivity.supportFragmentManager,
+                    CountryPickerBottomSheet.TAG
+                )
+            }
+        }
     }
 
     companion object {

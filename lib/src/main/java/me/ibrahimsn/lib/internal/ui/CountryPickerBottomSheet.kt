@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
+import androidx.core.view.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,7 +20,6 @@ import me.ibrahimsn.lib.R
 import me.ibrahimsn.lib.api.Country
 import me.ibrahimsn.lib.databinding.BottomSheetCountryPickerBinding
 import me.ibrahimsn.lib.internal.ext.default
-import me.ibrahimsn.lib.internal.ext.showIf
 import me.ibrahimsn.lib.internal.ext.toCountryList
 import me.ibrahimsn.lib.internal.io.FileReader
 import java.util.*
@@ -34,17 +33,14 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetCountryPickerBinding
 
     var onCountrySelectedListener: ((Country) -> Unit)? = null
+    lateinit var countryListener: CountryListener
 
     private val viewState: MutableStateFlow<CountryPickerViewState> = MutableStateFlow(
         CountryPickerViewState(emptyList())
     )
 
-    private val args: CountryPickerArguments by lazy {
-        requireNotNull(requireArguments().getParcelable(BUNDLE_ARGS))
-    }
-
     private val itemAdapter: CountryAdapter by lazy {
-        CountryAdapter(args.itemLayout)
+        CountryAdapter(R.layout.item_country_picker)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,16 +65,10 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initView() = with(binding) {
-        searchView.showIf(args.isSearchEnabled)
-
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(context)
             adapter = itemAdapter
-        }
-
-        imageButtonClose.setOnClickListener {
-            dismiss()
         }
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
@@ -94,6 +84,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
         itemAdapter.onItemClickListener = {
             onCountrySelectedListener?.invoke(it)
+            countryListener.getCountry(it)
             dismiss()
         }
     }
@@ -108,13 +99,12 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
         val countries = default {
             FileReader.readAssetFile(requireContext(), PhoneNumberKit.ASSET_FILE_NAME)
                 .toCountryList()
-                .filter {
-                    args.admittedCountries.isEmpty() || args.admittedCountries.contains(it.iso2)
-                }.filterNot {
-                    args.excludedCountries.contains(it.iso2)
-                }
         }
         viewState.value = CountryPickerViewState(countries)
+    }
+
+    fun setReturnCountryListener(listener: CountryListener){
+        this.countryListener = listener
     }
 
     private fun searchCountries(query: String?) {
@@ -132,15 +122,15 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+
     companion object {
-
         const val TAG = "countryPickerBottomSheet"
-        private const val BUNDLE_ARGS = "bundleArgs"
-
-        fun newInstance(
-            args: CountryPickerArguments
-        ) = CountryPickerBottomSheet().apply {
-            arguments = bundleOf(BUNDLE_ARGS to args)
+        fun newInstance(listener: CountryListener) = CountryPickerBottomSheet().apply {
+            setReturnCountryListener(listener)
         }
     }
+}
+
+interface CountryListener {
+    fun getCountry(country: Country)
 }

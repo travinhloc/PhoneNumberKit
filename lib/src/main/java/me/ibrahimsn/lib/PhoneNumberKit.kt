@@ -20,7 +20,7 @@ import me.ibrahimsn.lib.internal.ext.*
 import me.ibrahimsn.lib.internal.io.FileReader
 import me.ibrahimsn.lib.internal.model.State
 import me.ibrahimsn.lib.internal.pattern.CountryPattern
-import me.ibrahimsn.lib.internal.ui.CountryPickerArguments
+import me.ibrahimsn.lib.internal.ui.CountryListener
 import me.ibrahimsn.lib.internal.ui.CountryPickerBottomSheet
 import java.lang.ref.WeakReference
 import java.util.*
@@ -203,12 +203,10 @@ class PhoneNumberKit private constructor(
         input.get()?.isStartIconCheckable = true
         input.get()?.setStartIconOnClickListener {
             CountryPickerBottomSheet.newInstance(
-                CountryPickerArguments(
-                    itemLayout,
-                    searchEnabled,
-                    excludedCountries,
-                    admittedCountries
-                )
+            object : CountryListener{
+                override fun getCountry(country: Country) {
+                }
+            }
             ).apply {
                 onCountrySelectedListener = { country ->
                     clearInputValue()

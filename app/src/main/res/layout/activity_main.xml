@@ -7,10 +7,22 @@
     tools:context=".MainActivity"
     android:padding="50dp">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20dp"
+        android:text="OK"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:hint="Phone Number"
         app:layout_constraintTop_toTopOf="parent">
 

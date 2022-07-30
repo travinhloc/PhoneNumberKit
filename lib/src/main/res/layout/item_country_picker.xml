@@ -10,10 +10,12 @@
     android:clickable="true"
     android:focusable="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewFlag"
+        style="@style/ShapeAppearanceOverlay.App.CircleImageView"
         android:layout_width="22dp"
         android:layout_height="22dp"
+        android:scaleType="fitXY"
         tools:src="@drawable/country_flag_tr" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -26,14 +28,18 @@
         android:singleLine="true"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="16sp"
+        android:textSize="13sp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textColor="@color/dark"
         tools:text="Turkey (Türkiye)" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textViewCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:fontFamily="@font/dmsans_medium"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
         tools:text="90" />
 
 </LinearLayout>
