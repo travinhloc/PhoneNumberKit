@@ -1,12 +1,12 @@
 package me.ibrahimsn.lib
 
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.InputType
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.textfield.TextInputLayout
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
@@ -40,17 +40,17 @@ class PhoneNumberKit private constructor(
 
     private val state: MutableStateFlow<State> = MutableStateFlow(State.Ready)
 
-    private var input: WeakReference<TextInputLayout> = WeakReference(null)
+//    private var input: WeakReference<TextInputLayout> = WeakReference(null)
 
     private val countriesCache = mutableListOf<Country>()
 
-    private var inputValue: CharSequence?
-        get() = input.get()?.editText?.text
-        set(value) {
-            input.get()?.editText?.setText(value)
-        }
+//    private var inputValue: CharSequence?
+//        get() = input.get()?.editText?.text
+//        set(value) {
+//            input.get()?.editText?.setText(value)
+//        }
 
-    val isValid: Boolean get() = validate(inputValue)
+//    val isValid: Boolean get() = validate(inputValue)
 
     init {
         scope.launch(Dispatchers.IO) {
@@ -114,37 +114,37 @@ class PhoneNumberKit private constructor(
         )
     }
 
-    fun attachToInput(
-        input: TextInputLayout,
-        defaultCountry: Int,
-    ) {
-        this.input = WeakReference(input)
-        scope.launch {
-            val country = default {
-                getCountries().findCountry(defaultCountry)
-            }
-            if (country != null) {
-                attachToInput(input, country)
-            }
-        }
-    }
-
-    fun attachToInput(
-        input: TextInputLayout,
-        countryIso2: String,
-    ) {
-        this.input = WeakReference(input)
-        scope.launch {
-            val country = default {
-                getCountries().findCountry(
-                    countryIso2.trim().lowercase(Locale.ENGLISH)
-                )
-            }
-            if (country != null) {
-                attachToInput(input, country)
-            }
-        }
-    }
+//    fun attachToInput(
+//        input: TextInputLayout,
+//        defaultCountry: Int,
+//    ) {
+//        this.input = WeakReference(input)
+//        scope.launch {
+//            val country = default {
+//                getCountries().findCountry(defaultCountry)
+//            }
+//            if (country != null) {
+//                attachToInput(input, country)
+//            }
+//        }
+//    }
+//
+//    fun attachToInput(
+//        input: TextInputLayout,
+//        countryIso2: String,
+//    ) {
+//        this.input = WeakReference(input)
+//        scope.launch {
+//            val country = default {
+//                getCountries().findCountry(
+//                    countryIso2.trim().lowercase(Locale.ENGLISH)
+//                )
+//            }
+//            if (country != null) {
+//                attachToInput(input, country)
+//            }
+//        }
+//    }
 
     private fun collectState() = scope.launch {
         state.collect { state ->
@@ -153,15 +153,15 @@ class PhoneNumberKit private constructor(
                 is State.Attached -> {
                     if (isIconEnabled) {
                         getFlagIcon(state.country.iso2)?.let { icon ->
-                            input.get()?.startIconDrawable = icon
+//                            input.get()?.startIconDrawable = icon
                         }
                     }
-                    input.get()?.editText?.let { editText ->
-                        setupListener(editText, state.pattern)
-                    }
-                    if (inputValue.isNullOrEmpty()) {
-                        inputValue = state.country.code.toString()
-                    }
+//                    input.get()?.editText?.let { editText ->
+//                        setupListener(editText, state.pattern)
+//                    }
+//                    if (inputValue.isNullOrEmpty()) {
+//                        inputValue = state.country.code.toString()
+//                    }
                 }
             }
         }
@@ -176,49 +176,49 @@ class PhoneNumberKit private constructor(
     }
 
     private fun clearInputValue() {
-        inputValue = ""
+//        inputValue = ""
     }
 
-    private fun attachToInput(
-        input: TextInputLayout,
-        country: Country,
-    ) {
-        input.editText?.inputType = InputType.TYPE_CLASS_PHONE
-
-        input.isStartIconVisible = isIconEnabled
-        input.setStartIconTintList(null)
-
-        collectState()
-        setCountry(country.iso2)
-    }
+//    private fun attachToInput(
+//        input: TextInputLayout,
+//        country: Country,
+//    ) {
+//        input.editText?.inputType = InputType.TYPE_CLASS_PHONE
+//
+//        input.isStartIconVisible = isIconEnabled
+//        input.setStartIconTintList(null)
+//
+//        collectState()
+//        setCountry(country.iso2)
+//    }
 
     /**
      * Sets up country code picker bottomSheet
      */
-    fun setupCountryPicker(
-        activity: AppCompatActivity,
-        itemLayout: Int = R.layout.item_country_picker,
-        searchEnabled: Boolean = false,
-    ) {
-        input.get()?.isStartIconCheckable = true
-        input.get()?.setStartIconOnClickListener {
-            CountryPickerBottomSheet.newInstance(
-            object : CountryListener{
-                override fun getCountry(country: Country) {
-                }
-            }
-            ).apply {
-                onCountrySelectedListener = { country ->
-                    clearInputValue()
-                    setCountry(country)
-                }
-                show(
-                    activity.supportFragmentManager,
-                    CountryPickerBottomSheet.TAG
-                )
-            }
-        }
-    }
+//    fun setupCountryPicker(
+//        activity: AppCompatActivity,
+//        itemLayout: Int = R.layout.item_country_picker,
+//        searchEnabled: Boolean = false,
+//    ) {
+//        input.get()?.isStartIconCheckable = true
+//        input.get()?.setStartIconOnClickListener {
+//            CountryPickerBottomSheet.newInstance(
+//            object : CountryListener{
+//                override fun getCountry(country: Country) {
+//                }
+//            }
+//            ).apply {
+//                onCountrySelectedListener = { country ->
+//                    clearInputValue()
+//                    setCountry(country)
+//                }
+//                show(
+//                    activity.supportFragmentManager,
+//                    CountryPickerBottomSheet.TAG
+//                )
+//            }
+//        }
+//    }
 
     /**
      * Parses raw phone number into phone object
