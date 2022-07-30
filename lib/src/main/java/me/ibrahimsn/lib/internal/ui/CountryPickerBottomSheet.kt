@@ -41,8 +41,8 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetCountryPickerBinding
 
-    var onCountrySelectedListener: ((Country) -> Unit)? = null
-    lateinit var countryListener: CountryListener
+//    var onCountrySelectedListener: ((Country) -> Unit)? = null
+    var countryListener: CountryListener? = null
 
     private val viewState: MutableStateFlow<CountryPickerViewState> = MutableStateFlow(
         CountryPickerViewState(emptyList())
@@ -110,8 +110,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
         })
 
         itemAdapter.onItemClickListener = {
-            onCountrySelectedListener?.invoke(it)
-            countryListener.getCountry(it)
+            countryListener?.getCountry(it)
             dismiss()
         }
     }
