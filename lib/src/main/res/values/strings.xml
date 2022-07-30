@@ -3,5 +3,6 @@
     <string name="search_hint">Type country code or name…</string>
     <string name="bottom_sheet_title">Country Code</string>
     <string name="select_country_code">Select your country your code to add available phone number</string>
+    <string name="search_country_code">Search</string>
 
 </resources>

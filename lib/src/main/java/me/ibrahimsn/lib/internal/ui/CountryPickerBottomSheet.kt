@@ -1,13 +1,22 @@
 package me.ibrahimsn.lib.internal.ui
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +52,22 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
         CountryAdapter(R.layout.item_country_picker)
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.setSoftInputMode(0x10)
+        dialog.setOnShowListener {
+            Handler(Looper.getMainLooper()).post {
+                val bottomSheet = (dialog as? BottomSheetDialog)?.findViewById<View>(R.id.design_bottom_sheet) as? FrameLayout
+                bottomSheet?.let {
+                    BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
+                    bottomSheet.background = ContextCompat.getDrawable(requireContext(),
+                        R.drawable.bg_bottom_sheet_white_radius_35)
+                }
+            }
+        }
+        return dialog
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.ThemeOverlay_PhoneNumberKit_BottomSheetDialog)
@@ -71,15 +96,17 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
             adapter = itemAdapter
         }
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
+        search.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchCountries(newText)
-                return true
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchCountries(s.toString())
             }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
         })
 
         itemAdapter.onItemClickListener = {
