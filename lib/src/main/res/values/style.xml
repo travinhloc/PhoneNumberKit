@@ -10,7 +10,7 @@
     </style>
 
     <style name="Widget.PhoneNumberKit.BottomSheet"
-        parent="Widget.MaterialComponents.BottomSheet">
+        parent="Theme.Design.BottomSheetDialog">
 
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.PhoneNumberKit</item>
     </style>
