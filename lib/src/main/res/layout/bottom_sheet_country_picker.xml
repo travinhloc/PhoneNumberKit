@@ -55,6 +55,7 @@
             android:fontFamily="@font/dmsans_regular"
             android:gravity="center_vertical"
             android:hint="@string/search_country_code"
+            android:textColorHint="@color/text_secondary"
             android:padding="10dp"
             android:textColor="@color/dark"
             android:textSize="13sp" />
