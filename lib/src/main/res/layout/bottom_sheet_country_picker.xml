@@ -52,10 +52,11 @@
             android:background="@drawable/bg_edt_primary"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"
+            android:textCursorDrawable="@drawable/color_cursor"
             android:fontFamily="@font/dmsans_regular"
             android:gravity="center_vertical"
             android:hint="@string/search_country_code"
-            android:textColorHint="@color/text_secondary"
+            android:textColorHint="@color/dark_50"
             android:padding="10dp"
             android:textColor="@color/dark"
             android:textSize="13sp" />

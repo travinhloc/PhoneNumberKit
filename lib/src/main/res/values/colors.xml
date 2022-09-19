@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="greenCitrus">#FF99CC00</color>
-    <color name="greenChristi">#FF669900</color>
+    <color name="greenCitrus">#1240C0</color>
+    <color name="greenChristi">#1240C0</color>
 
     <color name="text_dark">@color/dark</color>
     <color name="text_secondary">#757575</color>
