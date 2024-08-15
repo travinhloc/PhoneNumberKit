@@ -10,9 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -22,18 +20,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.ibrahimsn.lib.PhoneNumberKit
 import me.ibrahimsn.lib.R
-import me.ibrahimsn.lib.api.Country
 import me.ibrahimsn.lib.databinding.BottomSheetCountryPickerBinding
 import me.ibrahimsn.lib.internal.ext.default
 import me.ibrahimsn.lib.internal.ext.toCountryList
 import me.ibrahimsn.lib.internal.io.FileReader
 import java.util.*
 
-class CountryPickerBottomSheet : BottomSheetDialogFragment() {
+class CountryPickerBottomSheet(
+    private val searchHint: String?,
+    private val isShowTitle: Boolean? = true) : BottomSheetDialogFragment() {
 
     private val supervisorJob = SupervisorJob()
 
@@ -41,7 +39,6 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetCountryPickerBinding
 
-//    var onCountrySelectedListener: ((Country) -> Unit)? = null
     var countryListener: CountryListener? = null
 
     private val viewState: MutableStateFlow<CountryPickerViewState> = MutableStateFlow(
@@ -90,6 +87,13 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun initView() = with(binding) {
+        if (searchHint.isNullOrBlank()) {
+            search.hint = searchHint
+        }
+        isShowTitle?.let {
+            binding.llTitle.visibility = if (it)View.VISIBLE else View.GONE
+        }
+
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(context)
@@ -151,6 +155,6 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "countryPickerBottomSheet"
-        fun newInstance() = CountryPickerBottomSheet()
+        fun newInstance(searchHint: String? = null, isShowTitle: Boolean? = null) = CountryPickerBottomSheet(searchHint, isShowTitle)
     }
 }
