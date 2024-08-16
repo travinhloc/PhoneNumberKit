@@ -31,7 +31,8 @@ import java.util.*
 
 class CountryPickerBottomSheet(
     private val searchHint: String?,
-    private val isShowTitle: Boolean? = true) : BottomSheetDialogFragment() {
+    private val isShowTitle: Boolean? = true,
+    private val isSearchCountry: Boolean? = false, ) : BottomSheetDialogFragment() {
 
     private val supervisorJob = SupervisorJob()
 
@@ -46,7 +47,7 @@ class CountryPickerBottomSheet(
     )
 
     private val itemAdapter: CountryAdapter by lazy {
-        CountryAdapter(R.layout.item_country_picker)
+        CountryAdapter(R.layout.item_country_picker, isSearchCountry)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -155,6 +156,6 @@ class CountryPickerBottomSheet(
 
     companion object {
         const val TAG = "countryPickerBottomSheet"
-        fun newInstance(searchHint: String? = null, isShowTitle: Boolean? = null) = CountryPickerBottomSheet(searchHint, isShowTitle)
+        fun newInstance(searchHint: String? = null, isShowTitle: Boolean? = null, isSearchCountry: Boolean? = null) = CountryPickerBottomSheet(searchHint, isShowTitle, isSearchCountry)
     }
 }

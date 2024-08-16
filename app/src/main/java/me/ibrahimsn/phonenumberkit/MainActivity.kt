@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val countries = FileReader.readAssetFile(this, PhoneNumberKit.ASSET_FILE_NAME).toCountryList()
         binding.btnBottom.setOnClickListener {
-            CountryPickerBottomSheet.newInstance().apply {
+            CountryPickerBottomSheet.newInstance(isSearchCountry = true).apply {
                 setReturnCountryListener(object : CountryListener {
                     override fun getCountry(country: Country) {
                         Toast.makeText(this@MainActivity, country.name,Toast.LENGTH_LONG ).show()

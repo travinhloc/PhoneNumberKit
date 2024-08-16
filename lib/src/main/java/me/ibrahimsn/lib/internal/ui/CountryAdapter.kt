@@ -14,6 +14,7 @@ import me.ibrahimsn.lib.R
 
 class CountryAdapter(
     @LayoutRes private var itemLayout: Int,
+    val isSearchCountry: Boolean?,
 ) : RecyclerView.Adapter<CountryAdapter.ItemViewHolder>() {
 
     private val items = mutableListOf<Country>()
@@ -62,9 +63,10 @@ class CountryAdapter(
 
         fun bind(country: Country) {
             this.boundItem = country
-            imageViewFlag.setImageResource(getFlagResource(country.iso2))
+            imageViewFlag.setImageResource(imageViewFlag.context.getFlagResource(country.iso2))
             textViewName.text = country.name
             textViewCode.text = country.code.toString()
+            textViewCode.visibility = if (isSearchCountry == true) View.GONE else View.VISIBLE
         }
 
         private fun getFlagResource(iso2: String?): Int {
