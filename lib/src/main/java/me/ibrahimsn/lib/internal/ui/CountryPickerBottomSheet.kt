@@ -88,7 +88,7 @@ class CountryPickerBottomSheet(
     }
 
     private fun initView() = with(binding) {
-        if (searchHint.isNullOrBlank()) {
+        if (!searchHint.isNullOrEmpty()) {
             search.hint = searchHint
         }
         isShowTitle?.let {
