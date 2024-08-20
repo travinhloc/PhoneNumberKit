@@ -5,11 +5,11 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 31
+        minSdkVersion 24
+        targetSdkVersion 33
         buildToolsVersion "30.0.3"
 
         compileOptions {
@@ -42,10 +42,14 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.travinhloc'
+            artifactId = 'phonenumberkit'
+            version = '2.0.1'
+
+            afterEvaluate {
                 from components.release
                 artifact androidSourcesJar
             }

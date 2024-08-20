@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "me.ibrahimsn.phonenumberkit"
-        minSdkVersion 19
-        targetSdkVersion 31
+        minSdkVersion 24
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
